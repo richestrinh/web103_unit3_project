@@ -1,0 +1,1 @@
+// Creating tables and populating the events and locations data that your web app will need to work with.
