@@ -4,12 +4,15 @@ import favicon from 'serve-favicon'
 import dotenv from 'dotenv'
 import eventRouter from './routes/events.js'
 import locationRouter from './routes/locations.js'
+import cors from 'cors'
 
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 
@@ -21,9 +24,12 @@ else if (process.env.NODE_ENV === 'production') {
     app.use(express.static('public'))
 }
 
-app.use('/api', eventRouter)
-app.use('/api', locationRouter)
+app.use('/events', eventRouter)
+app.use('/locations', locationRouter)
 
+app.get('/', (req, res) => {
+    res.status(200).send('<h1 style="text-align: center; margin-top: 50px;">Virtual Community Space API</h1>')
+})
 
 if (process.env.NODE_ENV === 'production') {
     app.get('/*', (_, res) =>

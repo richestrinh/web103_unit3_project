@@ -1,8 +1,11 @@
 import express from 'express'
-import getLocations from '../controllers/LocationsController'
+
+import LocationsController from '../controllers/locations.js'
 
 const router = express.Router()
 
-router.get('/:locationId', getLocations)
+// Routes to get all locations, and locations by id
+router.get('/', LocationsController.getLocations)
+router.get('/:locationId', LocationsController.getLocationById)
 
-export default Router
+export default router
