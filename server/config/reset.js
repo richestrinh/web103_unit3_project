@@ -62,7 +62,11 @@ const createLocationsTable = async () => {
         CREATE TABLE IF NOT EXISTS locations (
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
-            address VARCHAR(255) NOT NULL
+            address VARCHAR(255) NOT NULL,
+            city VARCHAR(255) NOT NULL,
+            state VARCHAR(255) NOT NULL,
+            zip VARCHAR(255) NOT NULL,
+            image TEXT NOT NULL
         )
     `;
     // Query pool
@@ -82,11 +86,15 @@ const seedLocationTable = async () => {
     // Insert values into location table
     locationData.forEach((location) => {
         const insertQuery = {
-            text: `INSERT INTO locations (name, address) VALUES ($1, $2)`,           
+            text: `INSERT INTO locations (name, address, city, state, zip, image) VALUES ($1, $2, $3, $4, $5, $6)`,           
         }
         const values = [
             location.name, 
-            location.address
+            location.address,
+            location.city,
+            location.state,
+            location.zip,
+            location.image
         ]
     
         // Query pool with insertQuery and values

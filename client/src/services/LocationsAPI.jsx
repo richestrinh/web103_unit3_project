@@ -7,7 +7,7 @@ const getAllLocations = async () => {
     return data;
 }
 
-const getLocationById = async () => {
+const getLocationById = async (id) => {
     const response = await fetch(`${locationsURL}/${id}`);
     const data = await response.json();
     return data;
